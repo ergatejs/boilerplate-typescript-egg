@@ -1,0 +1,74 @@
+{
+  "name": "ergatejs",
+  "version": "1.0.0",
+  "description": "ergatejs boilerplate",
+  "private": true,
+  "egg": {
+    "typescript": true,
+    "declarations": true
+  },
+  "scripts": {
+    "autod": "autod",
+    "start": "egg-scripts start --daemon --title=egg-server-ergatejs",
+    "stop": "egg-scripts stop --title=egg-server-ergatejs",
+    "dev": "egg-bin dev",
+    "debug": "egg-bin debug",
+    "build": "APP_ROOT=$PWD/app/view umi build",
+    "cov": "egg-bin cov",
+    "clean": "ets clean",
+    "ci": "npm run lint && npm run cov && npm run tsc",
+    "tsc": "ets && tsc -p tsconfig.json",
+    "test": "npm run lint && npm run test-local",
+    "test-local": "egg-bin test",
+    "lint": "npm run lint-be && npm run lint-fe",
+    "lint-be": "eslint --fix --ext .ts --ignore-pattern 'app/view/' .",
+    "lint-fe": "eslint --fix --ext .ts --ext .tsx -c app/view/.eslintrc  app/view/"
+  },
+  "dependencies": {
+    "egg": "^2.6.1",
+    "egg-scripts": "^2.6.0",
+    "egg-view-assets": "^1.6.0",
+    "egg-view-nunjucks": "^2.2.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@types/mocha": "^2.2.40",
+    "@types/node": "^7.0.12",
+    "@types/supertest": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^2.26.0",
+    "@typescript-eslint/parser": "^2.26.0",
+    "@umijs/preset-react": "^1.4.8",
+    "autod": "^3.0.1",
+    "autod-egg": "^1.1.0",
+    "egg-bin": "^4.11.0",
+    "egg-ci": "^1.8.0",
+    "egg-mock": "^3.16.0",
+    "eslint": "^6.7.2",
+    "eslint-config-airbnb-typescript": "^7.2.0",
+    "eslint-config-egg": "^8.0.0",
+    "eslint-import-resolver-typescript": "^2.0.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^3.0.0",
+    "tslib": "^1.9.0",
+    "typescript": "^3.0.0",
+    "umi": "^3.0.16"
+  },
+  "engines": {
+    "node": ">=8.9.0"
+  },
+  "ci": {
+    "version": "8"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "eslintIgnore": [
+    "coverage"
+  ],
+  "author": "Suyi <thonatos.yang@gmail.com>",
+  "license": "MIT"
+}

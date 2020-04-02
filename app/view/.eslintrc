@@ -1,0 +1,33 @@
+{
+  "extends": [
+    "airbnb-typescript"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "directory": "."
+      }
+    }
+  },
+  "plugins": [
+    "react",
+    "react-hooks"
+  ],
+  "rules": {
+    "import/no-extraneous-dependencies": "off",
+    "react/destructuring-assignment": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/no-multi-comp": "off",
+    "react/sort-comp": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
+  },
+  "globals": {
+    "window": "readonly",
+    "document": "readonly",
+    "XMLHttpRequest": "readonly"
+  }
+}
