@@ -23,7 +23,8 @@
     "react/no-multi-comp": "off",
     "react/sort-comp": "off",
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "warn",
+    "react/prop-types": "off"
   },
   "globals": {
     "window": "readonly",
