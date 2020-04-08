@@ -2,31 +2,31 @@ import { Effect, Reducer, Subscription } from 'umi';
 
 import { loadInfo } from '../../service/info';
 
-export interface IndexModelState {
+export interface InfoModelState {
   message: string;
 }
 
-export interface IndexModelType {
-  namespace: 'index';
-  state: IndexModelState;
+export interface InfoModelType {
+  namespace: 'info';
+  state: InfoModelState;
   effects: {
     load: Effect;
   };
   reducers: {
-    update: Reducer<IndexModelState>;
+    update: Reducer<InfoModelState>;
   };
   subscriptions: { setup: Subscription };
 }
 
-const IndexModel: IndexModelType = {
-  namespace: 'index',
+const InfoModel: InfoModelType = {
+  namespace: 'info',
 
   state: {
     message: '陌生人',
   },
 
   effects: {
-    * load({ payload }, { call, put }) {
+    *load({ payload }, { call, put }) {
       const { message } = yield call(loadInfo, payload);
       yield put({
         type: 'update',
@@ -47,7 +47,7 @@ const IndexModel: IndexModelType = {
   subscriptions: {
     setup({ dispatch, history }) {
       return history.listen(({ pathname }) => {
-        if (pathname === '/') {
+        if (pathname === '/info') {
           dispatch({
             type: 'load',
           });
@@ -57,4 +57,4 @@ const IndexModel: IndexModelType = {
   },
 };
 
-export default IndexModel;
+export default InfoModel;
