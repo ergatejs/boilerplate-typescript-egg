@@ -1,6 +1,6 @@
 export default {
   namespace: 'global',
   state: {
-    name: 'suyi',
+    user: 'suyi',
   },
 };

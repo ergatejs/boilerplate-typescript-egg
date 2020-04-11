@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, Button } from 'antd';
-import { ConnectProps, Loading, connect, useIntl } from 'umi';
+import { PageHeaderWrapper } from '@ant-design/pro-layout';
+import {
+  ConnectProps, Loading, connect, useIntl,
+} from 'umi';
 import { InfoModelState } from './model';
 
 import styles from './index.less';
@@ -30,10 +33,12 @@ const InfoPage: React.FC<PageProps> = ({ info, loading, dispatch }) => {
   };
 
   return (
-    <Card loading={loading}>
-      <h1 className={styles.title}>{title}</h1>
-      <Button onClick={handleLoad}>Load</Button>
-    </Card>
+    <PageHeaderWrapper content="春暖花开">
+      <Card loading={loading}>
+        <h1 className={styles.title}>{title}</h1>
+        <Button onClick={handleLoad}>Load</Button>
+      </Card>
+    </PageHeaderWrapper>
   );
 };
 

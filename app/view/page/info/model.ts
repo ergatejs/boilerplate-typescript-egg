@@ -1,5 +1,4 @@
 import { Effect, Reducer, Subscription } from 'umi';
-
 import { loadInfo } from '../../service/info';
 
 export interface InfoModelState {
@@ -26,7 +25,7 @@ const InfoModel: InfoModelType = {
   },
 
   effects: {
-    *load({ payload }, { call, put }) {
+    * load({ payload }, { call, put }) {
       const { message } = yield call(loadInfo, payload);
       yield put({
         type: 'update',

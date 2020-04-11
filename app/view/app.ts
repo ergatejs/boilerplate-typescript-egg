@@ -1,16 +1,33 @@
-import { request } from 'umi';
+import { request as requestClient, RequestConfig } from 'umi';
+import layoutConfig from './config/layoutConfig';
 
-export async function getInitialState() {
+export const getInitialState = async () => {
+  const raw = window.localStorage.getItem('auth');
+
+  if (raw) {
+    console.log(JSON.parse(raw));
+    return JSON.parse(raw);
+  }
+
   const params = { method: 'POST', json: {} };
-  const data = await request('/api/init', params);
+  const data = await requestClient('/api/info', params);
   return data;
-}
+};
 
-export const layout = {
-  logout: () => {},
-  rightRender: (initInfo: any) => {
-    if (!initInfo.user) {
-      return null;
-    }
-  },
+export const layout = layoutConfig;
+
+export const request: RequestConfig = {
+  timeout: 1000,
+  errorConfig: {},
+  middlewares: [
+  ],
+  requestInterceptors: [
+    // (url, options = {}) => {
+    //   return {
+    //     url,
+    //     options,
+    //   };
+    // },
+  ],
+  responseInterceptors: [],
 };
