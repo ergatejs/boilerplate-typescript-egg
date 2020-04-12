@@ -7,6 +7,7 @@ import {
 } from 'antd';
 import { DefaultFooter } from '@ant-design/pro-layout';
 
+
 const RightRender = (initInfo: any) => {
   const intl = useIntl();
   const locale = getLocale();
@@ -31,8 +32,6 @@ const RightRender = (initInfo: any) => {
       onClick={({ key }) => {
         if (key === 'logout') {
           window.localStorage.removeItem('auth');
-          // window.location.reload();
-
           history.push('/');
           refresh();
         }

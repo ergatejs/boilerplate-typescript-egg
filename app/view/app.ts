@@ -5,7 +5,10 @@ export const getInitialState = async () => {
   const raw = window.localStorage.getItem('auth');
 
   if (raw) {
-    return JSON.parse(raw);
+    const auth = JSON.parse(raw);
+    window.auth = auth;
+
+    return auth;
   }
 
   const params = { method: 'POST', json: {} };
@@ -20,11 +23,44 @@ export const request: RequestConfig = {
   errorConfig: {},
   middlewares: [],
   requestInterceptors: [
+    // graphql interceptors
     (url, options = {}) => {
-      console.log('=====');
+      let opts = {};
+
+      if (url.includes('v1/graphql')) {
+        let { auth } = window;
+
+        if (!auth) {
+          const raw = window.localStorage.getItem('auth') || '{}';
+          auth = JSON.parse(raw);
+        }
+
+        const {
+          auth: {
+            token,
+            info: { role },
+          },
+        } = auth;
+
+        const headers = {
+          ...options.headers,
+          authorization: `Bearer ${token}`,
+          'content-type': 'application/json',
+          'X-Hasura-Role': `${role}`,
+        };
+
+        opts = {
+          ...opts,
+          headers,
+        };
+      }
+
       return {
         url,
-        options,
+        options: {
+          ...options,
+          ...opts,
+        },
       };
     },
   ],

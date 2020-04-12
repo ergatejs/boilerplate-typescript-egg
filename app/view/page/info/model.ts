@@ -26,10 +26,10 @@ const InfoModel: InfoModelType = {
 
   effects: {
     * load({ payload }, { call, put }) {
-      const { data } = yield call(loadInfo, payload);
+      const { data: { documents } } = yield call(loadInfo, payload);
       yield put({
         type: 'update',
-        payload: { docs: data },
+        payload: { docs: documents },
       });
     },
   },

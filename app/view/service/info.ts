@@ -16,32 +16,12 @@ export const loadInfo = async () => {
   }  
   `;
 
-  let params: any = {
+  const params: any = {
     method: 'POST',
     data: {
       query,
     },
   };
-
-  const authRaw = window.localStorage.getItem('auth');
-
-  if (authRaw) {
-    const {
-      auth: {
-        token,
-        info: { role },
-      },
-    } = JSON.parse(authRaw);
-
-    params = {
-      ...params,
-      headers: {
-        'content-type': 'application/json',
-        authorization: `Bearer ${token}`,
-        'X-Hasura-Role': `${role}`,
-      },
-    };
-  }
 
   return request('http://localhost:8080/v1/graphql', params);
 };

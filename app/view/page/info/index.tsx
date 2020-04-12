@@ -23,7 +23,16 @@ const InfoPage: React.FC<PageProps> = ({ info, loading, dispatch }) => {
   return (
     <PageHeaderWrapper content="春暖花开">
       <Card loading={loading}>
-        {JSON.stringify(docs)}
+
+        { docs.map((doc) => {
+          const { id, title, content } = doc;
+          return (
+            <div key={id}>
+              <h2>{title}</h2>
+              <p>{content}</p>
+            </div>
+          );
+        })}
 
         <Button onClick={handleLoad}>Load</Button>
       </Card>
