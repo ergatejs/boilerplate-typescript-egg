@@ -1,14 +1,14 @@
 import { Service } from 'egg';
-import { IMember } from '../model/member';
+import { Member } from '../model/member';
 
 export default class AuthService extends Service {
-  public signJWTToekn(member: IMember) {
+  public signJWTToekn(member: Member) {
     const { app } = this;
     const { jwtAlgorithm, jwt: { secret } } = app.config;
 
     const { id, email, role } = member;
 
-    const raw = {
+    const info = {
       id,
       email,
       role,
@@ -20,11 +20,14 @@ export default class AuthService extends Service {
       },
     };
 
-    const token = app.jwt.sign(raw, secret, {
+    const token = app.jwt.sign(info, secret, {
       expiresIn: '2h',
       algorithm: jwtAlgorithm,
     });
 
-    return token;
+    return {
+      info,
+      token,
+    };
   }
 }

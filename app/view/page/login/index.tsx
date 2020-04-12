@@ -16,31 +16,34 @@ export default () => {
       data: values,
     });
 
-    const { member, access, token } = data;
+    const { member, access, auth } = data;
 
     if (member) {
-      // update
+      // update local
       if (values.remember) {
-        window.localStorage.setItem('auth', JSON.stringify({ token, member, access }));
+        window.localStorage.setItem(
+          'auth',
+          JSON.stringify({ auth, member, access }),
+        );
       }
 
-      // redirect
-      // history.push('/');
-
       // update state
-      // setInitialState({
-      //   token,
-      //   member,
-      //   access,
-      // });
+      setInitialState({
+        auth,
+        member,
+        access,
+      });
+
+      // redirect
+      history.push('/');
 
       refresh();
     }
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
-  };
+  // const onFinishFailed = (errorInfo: any) => {
+  //   console.log('Failed:', errorInfo);
+  // };
 
   const intl = useIntl();
 
@@ -54,7 +57,7 @@ export default () => {
               layout="vertical"
               initialValues={{ remember: true }}
               onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
+              // onFinishFailed={onFinishFailed}
             >
               <Form.Item
                 label={intl.formatMessage({ id: 'FORM_EMAIL' })}

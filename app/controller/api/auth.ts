@@ -13,11 +13,11 @@ export default class ApiAuthController extends Controller {
 
     delete member.hash;
 
-    const token = ctx.service.auth.signJWTToekn(member);
+    const auth = ctx.service.auth.signJWTToekn(member);
 
     ctx.body = {
       data: {
-        token,
+        auth,
         member,
         access: {
           canReadInfo: true,

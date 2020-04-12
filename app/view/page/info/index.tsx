@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, Button } from 'antd';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import {
-  ConnectProps, Loading, connect, useIntl,
+  ConnectProps, Loading, connect,
 } from 'umi';
 import { InfoModelState } from './model';
-
-import styles from './index.less';
 
 interface PageProps extends ConnectProps {
   loading: boolean;
@@ -14,17 +12,7 @@ interface PageProps extends ConnectProps {
 }
 
 const InfoPage: React.FC<PageProps> = ({ info, loading, dispatch }) => {
-  const { message } = info;
-
-  const intl = useIntl();
-  const title = intl.formatMessage(
-    {
-      id: 'INFO_WELCOME',
-    },
-    {
-      message,
-    },
-  );
+  const { docs } = info;
 
   const handleLoad = () => {
     if (dispatch) {
@@ -35,7 +23,8 @@ const InfoPage: React.FC<PageProps> = ({ info, loading, dispatch }) => {
   return (
     <PageHeaderWrapper content="春暖花开">
       <Card loading={loading}>
-        <h1 className={styles.title}>{title}</h1>
+        {JSON.stringify(docs)}
+
         <Button onClick={handleLoad}>Load</Button>
       </Card>
     </PageHeaderWrapper>

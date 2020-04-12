@@ -5,7 +5,6 @@ export const getInitialState = async () => {
   const raw = window.localStorage.getItem('auth');
 
   if (raw) {
-    console.log(JSON.parse(raw));
     return JSON.parse(raw);
   }
 
@@ -19,15 +18,15 @@ export const layout = layoutConfig;
 export const request: RequestConfig = {
   timeout: 1000,
   errorConfig: {},
-  middlewares: [
-  ],
+  middlewares: [],
   requestInterceptors: [
-    // (url, options = {}) => {
-    //   return {
-    //     url,
-    //     options,
-    //   };
-    // },
+    (url, options = {}) => {
+      console.log('=====');
+      return {
+        url,
+        options,
+      };
+    },
   ],
   responseInterceptors: [],
 };

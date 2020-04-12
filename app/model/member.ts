@@ -1,7 +1,7 @@
 import { Application } from 'egg';
 import { Model, DataTypes } from 'sequelize';
 
-class Member extends Model {
+export class Member extends Model {
   public id!: number;
   public email!: string;
   public avatar: string;
@@ -14,8 +14,7 @@ export default (app: Application) => {
 
   Member.init({
     id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
+      type: DataTypes.UUID,
       primaryKey: true,
     },
     email: DataTypes.TEXT,
@@ -25,7 +24,6 @@ export default (app: Application) => {
     hash: DataTypes.TEXT,
   }, {
     sequelize: app.model,
-    timestamps: false,
   });
 
   return Member;

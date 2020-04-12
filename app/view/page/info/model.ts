@@ -2,7 +2,7 @@ import { Effect, Reducer, Subscription } from 'umi';
 import { loadInfo } from '../../service/info';
 
 export interface InfoModelState {
-  message: string;
+  docs: [];
 }
 
 export interface InfoModelType {
@@ -21,15 +21,15 @@ const InfoModel: InfoModelType = {
   namespace: 'info',
 
   state: {
-    message: '陌生人',
+    docs: [],
   },
 
   effects: {
     * load({ payload }, { call, put }) {
-      const { message } = yield call(loadInfo, payload);
+      const { data } = yield call(loadInfo, payload);
       yield put({
         type: 'update',
-        payload: { message },
+        payload: { docs: data },
       });
     },
   },

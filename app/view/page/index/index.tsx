@@ -27,8 +27,8 @@ const CARDS = [
 export default () => (
   <PageHeaderWrapper content="欢迎使用">
     <Row gutter={16}>
-      {CARDS.map((item, index) => (
-        <Col span={8} key={index}>
+      {CARDS.map((item) => (
+        <Col span={8} key={item.title}>
           <Card title={item.title} bordered={false} className={styles.card}>
             {item.title}
           </Card>

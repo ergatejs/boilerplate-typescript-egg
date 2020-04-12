@@ -1,8 +1,8 @@
 import { Service } from 'egg';
-import { IMember } from '../model/member';
+import { Member } from '../model/member';
 
 export default class MemberService extends Service {
-  public async create(member: IMember, password = '') {
+  public async create(member: Member, password = '') {
     const { ctx } = this;
     const { email } = member;
     const salt = ctx.helper.slat();
@@ -16,9 +16,8 @@ export default class MemberService extends Service {
     return await ctx.model.Member.create(member);
   }
 
-  public async verify(email: string, password: string): Promise<IMember | null> {
+  public async verify(email: string, password: string): Promise<Member | null> {
     const { ctx } = this;
-    console.log(ctx.model.Member);
     const member = await ctx.model.Member.findOne({
       where: {
         email,
