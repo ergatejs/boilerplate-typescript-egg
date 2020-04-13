@@ -18,9 +18,16 @@ export default defineConfig({
 
   layout: {
     name: 'Ergate.js',
-    logo: null,
+    logo: '/public/logo.svg',
     locale: true,
     theme: 'pro',
+
+    // @ant-design/pro-layout
+    navTheme: 'light',
+    primaryColor: '#1890ff',
+    layout: 'topmenu',
+    contentWidth: 'Fixed',
+    fixedHeader: false,
   },
 
   locale: {
@@ -39,6 +46,45 @@ export default defineConfig({
   title: 'site.title',
 
   routes: [
-    { path: '/', component: '@/page/index', title: 'site.title' },
+    {
+      path: '/',
+      exact: true,
+      title: 'site.index',
+      access: 'canReadIndex',
+      component: '@/page/index',
+      menu: {
+        icon: 'home',
+        name: 'index',
+      },
+      layout: {
+        hideMenu: false,
+        hideNav: false,
+      },
+    },
+    {
+      path: '/info',
+      exact: true,
+      title: 'site.info',
+      access: 'canReadInfo',
+      component: '@/page/info',
+      menu: {
+        icon: 'setting',
+        name: 'info',
+      },
+      layout: {
+        hideNav: false,
+        hideMenu: false,
+      },
+    },
+    {
+      path: '/login',
+      exact: true,
+      title: 'site.login',
+      component: '@/page/login',
+      layout: {
+        hideMenu: false,
+        hideNav: false,
+      },
+    },
   ],
 });

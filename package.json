@@ -20,19 +20,29 @@
     "tsc": "ets && tsc -p tsconfig.json",
     "test": "npm run lint && npm run test-local",
     "test-local": "egg-bin test",
-    "lint": "npm run lint-be && npm run lint-fe",
-    "lint-be": "eslint --fix --ext .ts --ignore-pattern 'app/view/' .",
-    "lint-fe": "eslint --fix --ext .ts --ext .tsx -c app/view/.eslintrc  app/view/"
+    "lint": "npm run be-lint && npm run fe-lint",
+    "be-lint": "eslint --fix --ext .ts --ignore-pattern 'app/view/' .",
+    "fe-lint": "eslint --fix --ext .ts --ext .tsx -c app/view/.eslintrc  app/view/",
+    "fe-prettier": "prettier --write --config app/view/.prettierrc 'app/view/**/*.{js,jsx,tsx,ts,less,md,json}'"
+  },
+  "gitHooks": {
+    "pre-commit": ""
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "egg": "^2.6.1",
+    "egg-jwt": "^3.1.7",
     "egg-scripts": "^2.6.0",
+    "egg-sequelize": "^5.2.1",
     "egg-view-assets": "^1.6.0",
     "egg-view-nunjucks": "^2.2.0",
+    "pg": "^8.0.0",
+    "pg-hstore": "^2.3.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
+    "@ant-design/pro-layout": "^5.0.9",
     "@types/mocha": "^2.2.40",
     "@types/node": "^7.0.12",
     "@types/supertest": "^2.0.0",
@@ -53,6 +63,8 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^3.0.0",
+    "lint-staged": "^10.1.2",
+    "prettier": "^2.0.4",
     "tslib": "^1.9.0",
     "typescript": "^3.0.0",
     "umi": "^3.0.16"

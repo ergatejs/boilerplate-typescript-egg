@@ -1,8 +1,11 @@
 import * as path from 'path';
+import * as dotenv from 'dotenv';
 import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
 
 export default (appInfo: EggAppInfo) => {
   const config = {} as PowerPartial<EggAppConfig>;
+
+  dotenv.config();
 
   // override config from framework / plugin
   // use for cookie sign key, should change to your own and keep security
@@ -41,9 +44,23 @@ export default (appInfo: EggAppInfo) => {
     csrf: false,
   };
 
+  config.jwt = {
+    secret: process.env.JWT_SECRET || 'JWT_SECRET',
+  };
+
+  config.sequelize = {
+    dialect: 'postgres',
+    database: process.env.DB_NAME || 'postgres',
+    host: process.env.DB_HOST || 'localhost',
+    port: Number(process.env.DB_PORT) || 5432,
+    username: process.env.DB_USERNAME || 'postgres',
+    password: process.env.DB_PASSWORD || 'hasura',
+  };
+
   // add your special config in here
   const bizConfig = {
     sourceUrl: `https://github.com/eggjs/examples/tree/master/${appInfo.name}`,
+    jwtAlgorithm: process.env.JWT_ALGORITHM || 'HS256',
   };
 
   // the return config will combines to EggAppConfig

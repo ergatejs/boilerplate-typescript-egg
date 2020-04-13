@@ -1,49 +1,39 @@
 import React from 'react';
-import { Card, Button } from 'antd';
-import {
-  IndexModelState, ConnectProps, Loading, connect, useIntl,
-} from 'umi';
-
+import { Card, Col, Row } from 'antd';
+import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import styles from './index.less';
 
-interface PageProps extends ConnectProps {
-  loading: boolean;
-  index: IndexModelState;
-}
+const CARDS = [
+  {
+    title: 'Node.js',
+  },
+  {
+    title: 'TypeScript',
+  },
+  {
+    title: 'Egg.js',
+  },
+  {
+    title: 'Umi.js',
+  },
+  {
+    title: 'Ant.design',
+  },
+  {
+    title: 'Hausura',
+  },
+];
 
-const IndexPage: React.FC<PageProps> = ({ index, loading, dispatch }) => {
-  const { message } = index;
-
-  const intl = useIntl();
-  const title = intl.formatMessage(
-    {
-      id: 'INDEX_WELCOME',
-    },
-    {
-      message,
-    },
-  );
-
-  const handleLoad = () => {
-    if (dispatch) {
-      dispatch({ type: 'index/load' });
-    }
-  };
-
-  return (
-    <Card loading={loading}>
-      <h1 className={styles.title}>{title}</h1>
-      <Button onClick={handleLoad}>Load</Button>
-    </Card>
-  );
-};
-
-interface PageConnectProps {
-  index: IndexModelState;
-  loading: Loading;
-}
-
-export default connect(({ index, loading }: PageConnectProps) => ({
-  index,
-  loading: loading.models.index,
-}))(IndexPage);
+export default () => (
+  <PageHeaderWrapper content="欢迎使用">
+    <Row gutter={16}>
+      {CARDS.map((item) => (
+        <Col span={8} key={item.title}>
+          <Card title={item.title} bordered={false} className={styles.card}>
+            {item.title}
+          </Card>
+        </Col>
+      ))}
+    </Row>
+  </PageHeaderWrapper>
+);

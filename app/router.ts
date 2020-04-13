@@ -5,6 +5,7 @@ export default (app: Application) => {
 
   // api
   router.post('/api/info', controller.api.info.index);
+  router.post('/api/auth/verify', controller.api.auth.verify);
 
   // home
   router.get('*', controller.home.index);
