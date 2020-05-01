@@ -24,7 +24,7 @@ const InfoPage: React.FC<PageProps> = ({ info, loading, dispatch }) => {
     <PageHeaderWrapper content="春暖花开">
       <Card loading={loading}>
 
-        { docs.map((doc) => {
+        {docs.map((doc) => {
           const { id, title, content } = doc;
           return (
             <div key={id}>

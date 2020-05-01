@@ -1,5 +1,5 @@
 import { Effect, Reducer, Subscription } from 'umi';
-import { loadInfo } from '../../service/info';
+import { loadInfo } from '@/service/info';
 
 export interface InfoModelState {
   docs: [];
