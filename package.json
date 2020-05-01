@@ -42,6 +42,7 @@
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
+    "@ant-design/icons": "^4.1.0",
     "@ant-design/pro-layout": "^5.0.9",
     "@types/mocha": "^2.2.40",
     "@types/node": "^7.0.12",
