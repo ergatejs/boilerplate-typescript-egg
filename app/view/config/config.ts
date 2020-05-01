@@ -50,10 +50,10 @@ export default defineConfig({
       path: '/',
       exact: true,
       title: 'site.index',
+      icon: 'home',
       access: 'canReadIndex',
       component: '@/page/index',
       menu: {
-        icon: 'home',
         name: 'index',
       },
       layout: {
@@ -65,10 +65,10 @@ export default defineConfig({
       path: '/info',
       exact: true,
       title: 'site.info',
+      icon: 'setting',
       access: 'canReadInfo',
       component: '@/page/info',
       menu: {
-        icon: 'setting',
         name: 'info',
       },
       layout: {

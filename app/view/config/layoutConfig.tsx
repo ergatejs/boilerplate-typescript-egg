@@ -3,31 +3,41 @@ import {
   Link, useIntl, getLocale, setLocale, history, useModel,
 } from 'umi';
 import {
-  Avatar, Button, Divider, Dropdown, Menu,
+  Avatar, Divider, Dropdown, Menu,
 } from 'antd';
 import { DefaultFooter } from '@ant-design/pro-layout';
-
+import { GlobalOutlined } from '@ant-design/icons';
 
 const RightRender = (initInfo: any) => {
   const intl = useIntl();
   const locale = getLocale();
-  const { refresh } = useModel('@@initialState');
   const { member } = initInfo;
+  const { refresh } = useModel('@@initialState');
 
   // locale
-  const localeNode = (
-    <Button
-      size="small"
-      onClick={() => {
+  const languageMenu = (
+    <Menu
+      onClick={({ key }) => {
+        if (!key) {
+          return;
+        }
         const target = locale === 'zh-CN' ? 'en-US' : 'zh-CN';
         setLocale(target);
       }}
     >
-      {locale === 'zh-CN' ? 'Chinese' : 'English'}
-    </Button>
+      <Menu.Item key="en-US">English</Menu.Item>
+      <Menu.Item key="zh-CN">Chinese</Menu.Item>
+    </Menu>
   );
 
-  const menu = (
+  const LocaleNode = (
+    <Dropdown overlay={languageMenu}>
+      <GlobalOutlined />
+    </Dropdown>
+  );
+
+  // auth
+  const authMenu = (
     <Menu
       onClick={({ key }) => {
         if (key === 'logout') {
@@ -41,33 +51,24 @@ const RightRender = (initInfo: any) => {
     </Menu>
   );
 
-  // user
-  if (member) {
-    const { email, avatar } = member;
-    return (
-      <div>
-        {localeNode}
+  const AuthNode = member ? (
+    <Dropdown overlay={authMenu}>
+      <Avatar src={member.avatar}>{member.email}</Avatar>
+    </Dropdown>
+  ) : (
+    <Link to="/login">
+      {intl.formatMessage({
+        id: 'menu.login',
+      })}
+    </Link>
+  );
 
-        <Divider type="vertical" />
-
-        <Dropdown overlay={menu}>
-          <Avatar src={avatar}>{email}</Avatar>
-        </Dropdown>
-      </div>
-    );
-  }
-
-  // no user
+  // render
   return (
     <div>
-      {localeNode}
+      {LocaleNode}
       <Divider type="vertical" />
-
-      <Link to="/login">
-        {intl.formatMessage({
-          id: 'menu.login',
-        })}
-      </Link>
+      {AuthNode}
     </div>
   );
 };
